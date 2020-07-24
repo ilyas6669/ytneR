@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>359911954278-4bo7bf5vfbtuc2hpegl5mvrvotmlae2n.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.359911954278-4bo7bf5vfbtuc2hpegl5mvrvotmlae2n</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>359911954278-a9jio2sdlsdo01t6d5cpgfcjlpevpclh.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCoS6PBMnoJJgcoIBmG9kDfIfsGDN3WTv0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>359911954278</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ilyas666.Renty</string>
+	<key>PROJECT_ID</key>
+	<string>renty-331ca</string>
+	<key>STORAGE_BUCKET</key>
+	<string>renty-331ca.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:359911954278:ios:5bcd5f73e707e1fe82daa7</string>
+	<key>DATABASE_URL</key>
+	<string>https://renty-331ca.firebaseio.com</string>
+</dict>
+</plist>
