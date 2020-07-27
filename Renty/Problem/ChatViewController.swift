@@ -470,20 +470,21 @@ class ChatViewController: MessagesViewController,InputBarAccessoryViewDelegate, 
         let result = "\(hour):\(minutes)"
         return result
     }
+    
     func sendnotification(userid:String,title:String,body:String){
-          
-          let tokenRef = Database.database().reference().child("user").child(userid)
-          tokenRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                  let value = snapshot.value as? NSDictionary
-                  
-                  let token = value?["token"] as? String ?? ""
-          
-                  let sender = PushNotificationSender()
-                  sender.sendPushNotification(to: token,title: title,body: body)
-              
-              }) { (error) in
-                  print(error.localizedDescription)
-              }
-      }
+        
+        let tokenRef = Database.database().reference().child("user").child(userid)
+        tokenRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            
+            let token = value?["token"] as? String ?? ""
+            
+            let sender = PushNotificationSender()
+            sender.sendPushNotification(to: token,title: title,body: body)
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
     
 }

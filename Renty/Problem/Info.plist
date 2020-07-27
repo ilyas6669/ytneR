@@ -40,8 +40,10 @@
 	<key>Firebase</key>
 	<string></string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
-	<true/>
+	<false/>
 	<key>FirebaseScreenReportingEnabled</key>
+	<false/>
+	<key>irebaseMessagingAutoInitEnabled</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
