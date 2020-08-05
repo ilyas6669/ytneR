@@ -150,7 +150,6 @@ class KayitOlmadanGirisYap: UIViewController {
         }
     
     @objc func girisYapAction() {
-        print("test")
         let girisYap = SignUp()
         girisYap.modalPresentationStyle = .fullScreen
         self.present(girisYap, animated: true, completion: nil)
@@ -188,7 +187,6 @@ extension KayitOlmadanGirisYap : UICollectionViewDataSource,UICollectionViewDele
         }
         
         
-        //itemleri collection viewda gosterme
         let value2 = self.itemlist[indexPath.row]
 
         let itemid = value2["itemid"] as? String ?? ""
@@ -250,7 +248,6 @@ extension KayitOlmadanGirisYap : UICollectionViewDataSource,UICollectionViewDele
     func getitemfromDB(){
         
         let userRef = Database.database().reference().child("items")
-//        let userRef = Database.database().reference().child("items")
 
         userRef.observe(.value, with: { (snapshot) in
         

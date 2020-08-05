@@ -650,7 +650,7 @@ class Filtrele2: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource  {
     //
     //
     //    }
-    
+     
     @objc func pickerViewGizle() {
         view.endEditing(true)
     }
@@ -673,7 +673,7 @@ class Filtrele2: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource  {
     //        urunField.text = data[row]
     //        urunField.resignFirstResponder()
     //    }
-    
+    //brat bisen neyi tap Date diye bir se
     
     //Category Function
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

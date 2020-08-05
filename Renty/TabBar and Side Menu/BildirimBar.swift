@@ -75,6 +75,8 @@ class BildirimBar: UIViewController {
         
     }
     
+  
+    
     @objc func anaSayfaAction() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "TabbBar") as! TabbBarr

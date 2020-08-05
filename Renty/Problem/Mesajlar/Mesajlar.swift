@@ -157,7 +157,7 @@ extension Mesajlar : UICollectionViewDataSource,UICollectionViewDelegateFlowLayo
         let navController = UINavigationController(rootViewController: vc)
         navController.modalPresentationStyle = .fullScreen
         self.present(navController, animated: true, completion: nil)
-        
+      
         
 //        let chat = ViewMesaj()
 //        //let userid = self.userIdList[indexPath.row]

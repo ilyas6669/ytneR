@@ -8,10 +8,11 @@
 
 import UIKit
 import CarbonKit
+import Firebase
 
 
 class HomeBar: UIViewController,CarbonTabSwipeNavigationDelegate {
-   
+   //save token deye metod olmalidi onu taoaf harda biz yazmisixb il?mire biz yazmisdix ?
     var controllerNames = ["BANA ÖZEL","KATEGORİLER"]
     var carbonTabSwipeNavigation = CarbonTabSwipeNavigation()
    
@@ -40,8 +41,22 @@ class HomeBar: UIViewController,CarbonTabSwipeNavigationDelegate {
         
         
         carbonTabSwipeNavigation.insert(intoRootViewController: self)
-       
     
+    }
+    func sendnotification(userid:String,title:String,body:String){
+           //bidene rentydekini yoxla bildirimi gozde
+           let tokenRef = Database.database().reference().child("Tokens").child(userid)
+           tokenRef.observeSingleEvent(of: .value, with: { (snapshot) in
+               let value = snapshot.value as? NSDictionary
+               
+               let token = value?["token"] as? String ?? ""
+
+               let sender = PushNotificationSender()
+               sender.sendPushNotification(to: token,title: title,body: body)
+               
+           }) { (error) in
+               print(error.localizedDescription)
+           }
     }
     
     @objc func rentyAnaSayfa() {
@@ -53,7 +68,7 @@ class HomeBar: UIViewController,CarbonTabSwipeNavigationDelegate {
     }
     
     
-    
+    //sav token hardadyi 
     func carbonTabSwipeNavigation(_ carbonTabSwipeNavigation: CarbonTabSwipeNavigation, viewControllerAt index: UInt) -> UIViewController {
         guard let storyboard = storyboard else {return UIViewController()} 
         if index == 0

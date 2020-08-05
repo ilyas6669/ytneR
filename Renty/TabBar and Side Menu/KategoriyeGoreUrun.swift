@@ -312,6 +312,8 @@ class KategoriyeGoreUrun: UIViewController,CLLocationManagerDelegate, UIGestureR
         sortkeyword = "yuksekfiyat"
         getitemfromDB(siralama: sortkeyword, filterkeyword: filtrelekeyword)
         handleDismissal()
+        
+        //sen bulari diyirsende?
     }
     
     @objc func dusukFiyatAction() {
@@ -572,6 +574,8 @@ class KategoriyeGoreUrun: UIViewController,CLLocationManagerDelegate, UIGestureR
 }
 
 
+
+
 extension KategoriyeGoreUrun : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     
@@ -700,6 +704,7 @@ extension KategoriyeGoreUrun : UICollectionViewDataSource,UICollectionViewDelega
                   let longitude = value!["longitude"] as? Double ?? 0.0
                    let itemid = value!["itemid"] as? String ?? ""
                 let title = value!["title"] as? String ?? ""
+                
                             
 
                   
@@ -718,7 +723,11 @@ extension KategoriyeGoreUrun : UICollectionViewDataSource,UICollectionViewDelega
                              latitude: latitude,
                               itemid: itemid,
                               title: title)
-                  
+
+                  let sehir = value!["sehir"] as? String ?? ""
+                 let publisher = value!["publisher"] as? String ?? ""
+                  if sehir == Cache.usersehir && publisher != Auth.auth().currentUser?.uid {
+                      //yoxla isdiyir he bawa hara var goren hec yer sende acan kimi mene bildirim gelir onu yigisdirarsan mendede sene getmelidi  yaxsi gozde baxim bide bezner urunleri kontrol elemeliyik
                   if itempublish { /// urun silinmeyibse
                       
                       if self.itemcategory == category{ /// kategoriye kontrol
@@ -785,8 +794,14 @@ extension KategoriyeGoreUrun : UICollectionViewDataSource,UICollectionViewDelega
                           }
                           
                       }
-                      
+                    }
                   }
+                
+                if self.itemlist.count == 0 {
+                    self.makeAlertt(tittle: "UYARI", message: "Renty de ürünler seçdiğiniz şehirlere göre listeleniyor.Seçdiğiniz şehirde hiç bir ürün bulunamadı.Diğer ürünleri görmek için AYARLAR kısmından şehirinizi değiştire bilirsiniz")
+                }else{
+                    
+                }
                   
                   /// set actionbar title and image
                   self.titleDeyis()

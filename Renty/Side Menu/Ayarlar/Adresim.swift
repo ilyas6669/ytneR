@@ -74,6 +74,7 @@ class Adresim: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     @IBAction func btnLeft(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    //buradi
     @IBAction func btnOkey(_ sender: Any) {
           self.activityIndicator.startAnimating()
         var firebaseusermap = [String : Any]()
@@ -92,6 +93,8 @@ class Adresim: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
             }
             self.activityIndicator.stopAnimating()
         }
+        //bu yox konum guncelleme yeri olmaliydi adin minut bidene urun oaylasdm gor onun nkonumu hara oldu guncelledim bayburt olur 
+        Cache.usersehir = "\(country)"
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "TabbBar") as! TabbBarr

@@ -365,6 +365,12 @@ class SebetimBar: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 let kind1 = value!["kind1"] as? String ?? ""
                 let itemid = value!["itemid"] as? String ?? ""
                 
+                //yoxluyum prosta bunu bilenmiyecem neyse isdiyer isyeq ini isdiyecey yoxalma ne qaldi indi ? oz urunumuzu gormememeh kecen defe ikisin birden elemeishdine he oyda basdan deyerdine bide eyni yerlere gedeciy indi yene bir bir urun alinan yerere get bide searchbarada da var
+                let sehir = value!["sehir"] as? String ?? ""
+                 let publisher = value!["publisher"] as? String ?? ""
+                
+                if sehir == Cache.usersehir && publisher != Auth.auth().currentUser?.uid  {
+                
                 if itempublish {
                     if currentcategory == category &&
                         currentkind1   == kind1 &&
@@ -372,8 +378,10 @@ class SebetimBar: UIViewController,UICollectionViewDelegate,UICollectionViewData
                         self.similaritemlist.append(value!)
                     }
                 }
+                }
                 
             }
+            
             print("Similar:\(self.similaritemlist.count)")
             if self.similaritemlist.count == 0 {
                 
@@ -592,7 +600,7 @@ class SebetimBar: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     func sendnotification(userid:String,title:String,body:String){
         
-        let tokenRef = Database.database().reference().child("user").child(userid)
+        let tokenRef = Database.database().reference().child("Tokens").child(userid)
         tokenRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             

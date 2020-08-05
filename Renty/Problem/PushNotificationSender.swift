@@ -8,16 +8,17 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class PushNotificationSender {
-    
     func sendPushNotification(to token: String, title: String, body: String) {
         let urlString = "https://fcm.googleapis.com/fcm/send"
         let url = NSURL(string: urlString)!
-        let paramString: [String : Any] = ["to" : token,
-                                           "notification" : ["title" : title, "body" : body],
-                                           "data" : ["user" : "test_id"]
+        let paramString: [String : Any] = ["to" : "\(token)",
+            "notification" : ["title" : title, "body" : body],
+            "data" : ["user" : Auth.auth().currentUser?.uid]
         ]
+       
         let request = NSMutableURLRequest(url: url as URL)
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject:paramString, options: [.prettyPrinted])
@@ -25,15 +26,25 @@ class PushNotificationSender {
         request.setValue("key=AAAAU8xsl2Y:APA91bH8dcBJMumIsMUCMz-0a2hDwgjYfGjtYCjpYLGUO1ezoc7Oe2mngWYT_CmM8H4sLDv6lBZstV2BFcgr8ka2OMFskSpmjtMETTCyYiH8-hssPAUStCLDc480phM5Eo-uTYr560b2", forHTTPHeaderField: "Authorization")
         let task =  URLSession.shared.dataTask(with: request as URLRequest)  { (data, response, error) in
             do {
+             
+                //splasha get 
                 if let jsonData = data {
                     if let jsonDataDict  = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject] {
-                        NSLog("Received data:\n\(jsonDataDict))")
+                        print("Nicatalibli:JsonError:\(jsonDataDict)")
                     }
                 }
+                
             } catch let err as NSError {
-                print(err.debugDescription)
+                print("Nicatalibli:\(err.debugDescription)")
             }
         }
         task.resume()
     }
 }
+
+
+
+
+
+
+

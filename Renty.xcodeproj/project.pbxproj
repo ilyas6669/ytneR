@@ -107,6 +107,7 @@
 		00FFB820244255AD001E0082 /* BenzerUrunCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFB81E244255AD001E0082 /* BenzerUrunCell.swift */; };
 		00FFB821244255AD001E0082 /* BenzerUrunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00FFB81F244255AD001E0082 /* BenzerUrunCell.xib */; };
 		1E70F43C1E3C974DA490F1FE /* Pods_Renty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770506677D65475F4C2F4DF9 /* Pods_Renty.framework */; };
+		E43FE90324D6E30200F8E6CC /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43FE90224D6E30200F8E6CC /* Cache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -213,6 +214,7 @@
 		00FFB81F244255AD001E0082 /* BenzerUrunCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BenzerUrunCell.xib; sourceTree = "<group>"; };
 		7300ADBE9D06FCACCDBEA6EB /* Pods-Renty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Renty.debug.xcconfig"; path = "Target Support Files/Pods-Renty/Pods-Renty.debug.xcconfig"; sourceTree = "<group>"; };
 		770506677D65475F4C2F4DF9 /* Pods_Renty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Renty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43FE90224D6E30200F8E6CC /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		F29A18344DC66B61CED8A9C9 /* Pods-Renty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Renty.release.xcconfig"; path = "Target Support Files/Pods-Renty/Pods-Renty.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -317,16 +319,14 @@
 		0075149A23FB3F8600B8FDE2 /* Renty */ = {
 			isa = PBXGroup;
 			children = (
-				0075149B23FB3F8600B8FDE2 /* AppDelegate.swift */,
+				E4E792B624CF938A00BFC8FA /* Problem */,
 				0075149D23FB3F8600B8FDE2 /* SceneDelegate.swift */,
 				007514A423FB3F8B00B8FDE2 /* Assets.xcassets */,
-				007514A923FB3F8B00B8FDE2 /* Info.plist */,
 				00486DE7244B28C200A8DD71 /* GoogleService-Info.plist */,
-				00D17ADC244F58BB00F5A94C /* PushNotificationSender.swift */,
+				007514A923FB3F8B00B8FDE2 /* Info.plist */,
 				00EC75AB240C7F5500401CE7 /* StoryBoard */,
 				007514B123FB451D00B8FDE2 /* Login */,
 				0067D7B12409B4FD004C85AB /* TabBar and Side Menu */,
-				00A85A91245363BC0046E484 /* Mesajlar */,
 				005E5993241E5F1A00CF24AC /* Side Menu */,
 				00F9053424352CC90082D3E4 /* Extension */,
 				009ED617241AC0F800FC6D60 /* Model */,
@@ -338,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				007514D323FDE0AB00B8FDE2 /* SplahView.swift */,
+				E43FE90224D6E30200F8E6CC /* Cache.swift */,
 				006CC2D42429291F007A5699 /* InternetConnectionManager.swift */,
 				001BD9CC24082E720012E48F /* BlackedView.swift */,
 				0075151C23FF33F100B8FDE2 /* WelcomeSayfa.swift */,
@@ -370,7 +371,6 @@
 				005E5996241E5FEC00CF24AC /* Mesajlar.swift */,
 				00F90553243631C90082D3E4 /* MesajlarCell.swift */,
 				00F90554243631C90082D3E4 /* MesajlarCell.xib */,
-				008088BF244FA641001956CC /* ChatViewController.swift */,
 				008088BD244FA58C001956CC /* Chat.swift */,
 				008088BB244FA565001956CC /* Message.swift */,
 			);
@@ -440,6 +440,17 @@
 				F29A18344DC66B61CED8A9C9 /* Pods-Renty.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E4E792B624CF938A00BFC8FA /* Problem */ = {
+			isa = PBXGroup;
+			children = (
+				0075149B23FB3F8600B8FDE2 /* AppDelegate.swift */,
+				00D17ADC244F58BB00F5A94C /* PushNotificationSender.swift */,
+				008088BF244FA641001956CC /* ChatViewController.swift */,
+				00A85A91245363BC0046E484 /* Mesajlar */,
+			);
+			path = Problem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -610,6 +621,7 @@
 				0067D7BF240A6FE6004C85AB /* TabbBarr.swift in Sources */,
 				00943C9D2426E3A000252D2D /* AldiklarimCell.swift in Sources */,
 				0069108C2423FBB0007E775E /* UrunSayfasi.swift in Sources */,
+				E43FE90324D6E30200F8E6CC /* Cache.swift in Sources */,
 				00B713F6241F147D00BE25A1 /* SideMenuGeriBildirim.swift in Sources */,
 				0075152323FF442B00B8FDE2 /* GecisController.swift in Sources */,
 				002A9231240424C4004ABF87 /* Country.swift in Sources */,
@@ -812,7 +824,7 @@
 				CODE_SIGN_ENTITLEMENTS = Renty/Renty.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.6;
+				CURRENT_PROJECT_VERSION = 1.8;
 				DEVELOPMENT_TEAM = 695LGZ67Y9;
 				INFOPLIST_FILE = Renty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -820,7 +832,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilyas666.Rentty;
 				PRODUCT_NAME = Renty;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -837,7 +849,7 @@
 				CODE_SIGN_ENTITLEMENTS = Renty/Renty.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.6;
+				CURRENT_PROJECT_VERSION = 1.8;
 				DEVELOPMENT_TEAM = 695LGZ67Y9;
 				INFOPLIST_FILE = Renty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -845,7 +857,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilyas666.Rentty;
 				PRODUCT_NAME = Renty;
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -21,7 +21,7 @@ class AramaYap: UIViewController {
     
     var searching = false
     var sendtext = ""
-    
+ 
     
     @IBOutlet weak var viewSearch: UIView!
     
@@ -141,6 +141,8 @@ extension AramaYap : UITableViewDataSource,UITableViewDelegate {
                         
                         let word = value!["word"] as? String ?? ""
                         let searchid2 = value!["searchid"] as? String ?? ""
+                        
+                        //burda eliyim onda  ? he bunun yaxiris zad deilde duzdu ?
                         
                         
                         if word.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == searchword.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) {

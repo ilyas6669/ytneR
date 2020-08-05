@@ -217,7 +217,7 @@ class Urunlerim: UIViewController, UIGestureRecognizerDelegate {
                         _ = value2["pricestr"] as? String ?? ""
                            
                            let refreshAlert = UIAlertController(title: "Ürün Durumu", message: "Ürününü silmek istediğinizden eminmisiniz ? .", preferredStyle: UIAlertController.Style.alert)
-                           
+                         
                            refreshAlert.addAction(UIAlertAction(title: "Evet", style: .default, handler: { (action: UIAlertAction!) in
                                var firebaseusermap = [String : Any]()
                                firebaseusermap["itempublish"] = false

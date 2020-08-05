@@ -25,10 +25,7 @@ class SplahView: UIViewController {
             //        try! Auth.auth().signOut()
         
         
-        //        let sender = PushNotificationSender()
-        //        sender.sendPushNotification(to: "token", title: "Notification title", body: "Notification body")
-        
-        
+    
         
         if InternetConnectionManager.isConnectedToNetwork(){
             
@@ -45,6 +42,7 @@ class SplahView: UIViewController {
                     let accountcomplete = value?["accountcomplete"] as? String ?? ""
                     let blockedadmin = value?["blockedadmin"] as? String ?? ""
                     
+                    
                     if(blockedadmin == "false"){//kullanici engellenmemisse
                         
                         if(accountcomplete == "false"){ //profil tamamlanmamissa
@@ -55,6 +53,9 @@ class SplahView: UIViewController {
                             
                         }else{
                             
+                            let sehir = value?["sehir"] as? String ?? ""
+                            Cache.usersehir = sehir
+                            //sehir deyistirme yeri haradi ? 
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             let vc = storyboard.instantiateViewController(withIdentifier: "TabbBar") as! TabbBarr
                             vc.selectedIndex = 0

@@ -656,7 +656,7 @@ class UrunSayfasi: UIViewController,MKMapViewDelegate, FSCalendarDataSource, FSC
     }
     
     
-    
+    //bulardan hansidi
     func calculatetotaldayprice(daycounter : Int, itemprice : String) -> Int{
         var toplamfiyat = 0
         
@@ -679,6 +679,8 @@ class UrunSayfasi: UIViewController,MKMapViewDelegate, FSCalendarDataSource, FSC
         
         return toplamfiyat
     }
+    
+    
     func convertdate(date : Date) -> String {
         //    "01 Oca 2020"
         let date = date
@@ -871,14 +873,21 @@ class UrunSayfasi: UIViewController,MKMapViewDelegate, FSCalendarDataSource, FSC
                   let category = value!["category"] as? String ?? ""
                   let kind1 = value!["kind1"] as? String ?? ""
                   let itemid = value!["itemid"] as? String ?? ""
-                                              
-                  if itempublish {
-                      if currentcategory == category &&
-                         currentkind1   == kind1 &&
-                         currentitemid  != itemid {
-                          self.similaritemlist.append(value!)
-                      }
-                  }
+                
+           
+                let sehir = value!["sehir"] as? String ?? ""
+                 let publisher = value!["publisher"] as? String ?? ""
+                
+                if sehir == Cache.usersehir && publisher != Auth.auth().currentUser?.uid {
+                    
+                    if itempublish {
+                        if currentcategory == category &&
+                            currentkind1   == kind1 &&
+                            currentitemid  != itemid {
+                            self.similaritemlist.append(value!)
+                        }
+                    }
+                }
                   
               }
               if self.similaritemlist.count == 0 {
@@ -919,6 +928,7 @@ class UrunSayfasi: UIViewController,MKMapViewDelegate, FSCalendarDataSource, FSC
       }
     
     func getitemdata(){
+        //bu userden almalidid itemnen alir belke onnandi ?  yox userden alir brat yeni itemin icine saxranit olunan userin bilkdime onda itemisin icine userin idisin harda saxranit eliyirihki biz ? burda konumu itemnen alirig itemin icinede itemi saxranit eliyende userden konum alib saxranit leiyirik bidene bilsen ne sefdi latitudeynen longitude eynidi men dbdan urunlerei sildim ona gore oldu birinci konumu guncelle sonra urun paylas bildm birde eyer duz olsa kayit olma yerine baxag bide gordun ordada eyni qoymusug duzeldi yobana vurod bele shevin icine soxumda ograshdi adam bilmir gulsun aglasin mendede duzs du :D :D bu niye error verdi yene yoxsa vebremyedi bayaxkidi hdee yetseebn qalp tebrik eliyirem yetim bu da bele getti ;D bunna sora nese cixsa oluopda ALA HELE ENGELLEMENI SOXMUSUGE XEBERI YOXUD ;D: :DD:D hele filtirelemedede soxus var :D :D :D :D :D BIDENE KAYIT OLMA YERINE BAX GOR ORDADA PROBLEM YOXUD KODLARINA GET 
         
         let userRef = Database.database().reference().child("items").child(itemid)
         
@@ -945,7 +955,7 @@ class UrunSayfasi: UIViewController,MKMapViewDelegate, FSCalendarDataSource, FSC
             let itemid = value!["itemid"] as? String ?? ""
             self.publisher = value!["publisher"] as? String ?? ""
             
-            self.getveri()
+            self.getveri() // bun eid ? bezner urunelr ? ne dbda da eynidi dzu alirsan saxranit eliyende nese trema var userdede eynidi bidene o profili duzenleye get 
             
             if itempublish{
                 
@@ -979,9 +989,10 @@ class UrunSayfasi: UIViewController,MKMapViewDelegate, FSCalendarDataSource, FSC
                     ])
                 }
                 
-                //set pin in map
+                //set pin in map buralardi latitude alanda xiar kimi dexlisiz yer alir neter olur bas acmadm dian
                 let annotation = MKPointAnnotation()
                 let centerCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                print("la/\(latitude),\(longitude)")
                 annotation.coordinate = centerCoordinate
                 annotation.title = "Ürün Konumu"
                 self.harita.addAnnotation(annotation)
@@ -1024,7 +1035,7 @@ class UrunSayfasi: UIViewController,MKMapViewDelegate, FSCalendarDataSource, FSC
                 
                 ///get item comment
                 let userRef = Database.database().reference().child("user").child(self.publisher).child("Comments")
-                
+                //indi tema nedi meselen androide paylasilan urununded konumun sef gosterir ? yoxsa oz paylasilanlari ? onu deqiq tutanmiramki ba men indi bidene paylasim gor sende o hara gosterir mende hara paylas paylasdm nicatda bidene konum guncelle seyde konum dediyim seherivi deyiwdir mende error veerdi seeher deyisnede andrpidde ne basa dusmedim hansi seherde pahanyslas m hansisa sehere deyeisdir guncelle gor error verir deisdirib oaylasdim mende ilin bayramovdu telde andoriide sen nicata gir baxda bidedne urune mende parolu yoxdu qalsn cixmiyim girirem bideki nicat hesabinda bidene test oaylasimi var ona basanda atir onu silmeh lazmdi dbdan urunu silme yerine get 
                 userRef.observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
                     

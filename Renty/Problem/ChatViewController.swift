@@ -14,7 +14,6 @@ import FirebaseFirestore
 import SDWebImage
 
 
-
 class ChatViewController: MessagesViewController,InputBarAccessoryViewDelegate, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
     
     
@@ -471,9 +470,10 @@ class ChatViewController: MessagesViewController,InputBarAccessoryViewDelegate, 
         return result
     }
     
+  
     func sendnotification(userid:String,title:String,body:String){
-        
-        let tokenRef = Database.database().reference().child("user").child(userid)
+        //bidene rentydekini yoxla bildirimi gozde
+        let tokenRef = Database.database().reference().child("Tokens").child(userid)
         tokenRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             

@@ -442,7 +442,7 @@ class Search: UIViewController,CLLocationManagerDelegate {
                 let longitude = value!["longitude"] as? Double ?? 0.0
                 let itemid = value!["itemid"] as? String ?? ""
             
-                
+                //bura? he
                 
                 
                 let itemobject = Items.init(
@@ -461,7 +461,9 @@ class Search: UIViewController,CLLocationManagerDelegate {
                     itemid: itemid,
                     title: title
                     )
-                
+                let sehir = value!["sehir"] as? String ?? ""
+                 let publisher = value!["publisher"] as? String ?? ""
+                              if sehir == Cache.usersehir && publisher != Auth.auth().currentUser?.uid {
                 if itempublish { /// urun silinmeyibse
                     
                         
@@ -547,7 +549,8 @@ class Search: UIViewController,CLLocationManagerDelegate {
                 //self.titleDeyis()
                     
                 }
-                
+                }
+              
             }
             
             if self.sortkeyword != "none" { //siralama

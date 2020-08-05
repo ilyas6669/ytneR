@@ -541,7 +541,7 @@ class ProfiliTamamlaViewController: UIViewController,UIPickerViewDataSource,UIPi
         firebaseusermap["acikadres"] = "\(acikadres!)"
         firebaseusermap["latitude"] = Double(latitude)!
         firebaseusermap["longitude"] = Double(longutide)!
-        
+        //HE FSYO BASAG YAYINLAMAGA BUNUDA SWINIDE heresinde duzeldeceyim bir ikisi qisa sey var olurai duzeldim atiram bi r bir YAXSI YETIM BABAT ISDEDIY BUGUN SENOL :D :D he gorashdi gotum yapibse bura ala bide ne edeyeceydim ses ataram YAXSI MENDE FIRLANAN STOL AVR QAQAN KAYFDADI ala menim kod yazdigim veziiyeti goresen evde ograshdi icin sikimde :D :D MEN SENE SEKIL ATACAM INDI QAQA`N DIVIJ VEZIYET QURUP BURDA DAVAYDA YETIM MACI CIXIRAM MEN YAYINLIYGAG TEZ ABZA opeyremmm
         //database kayit etme
         let ref = Database.database().reference()
         ref.child("user").child(userID).updateChildValues(firebaseusermap)

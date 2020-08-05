@@ -342,6 +342,9 @@ class UrunEkleSon: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
         return txt
     }()
     
+    var rightBarButtonItem : UIBarButtonItem?
+    var leftBarButtonItem : UIBarButtonItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -439,10 +442,10 @@ class UrunEkleSon: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
         navigationController?.navigationBar.barTintColor = UIColor.customGreen()
         navigationController?.navigationBar.isTranslucent = false
         
-        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "tick-2"), style: .done, target: self, action: #selector(urunEkleAction))
+         rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "tick-2"), style: .done, target: self, action: #selector(urunEkleAction))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
-        let leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "left1"), style: .done, target: self, action: #selector(leftAction))
+         leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "left1"), style: .done, target: self, action: #selector(leftAction))
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         
         
@@ -636,6 +639,9 @@ class UrunEkleSon: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
     func saveimage(){
         
         activt.startAnimating()
+        leftBarButtonItem?.isEnabled = true
+        rightBarButtonItem?.isEnabled = true
+        
         //database kayit etme
         let itemid = Database.database().reference().child("item").childByAutoId().key
         
@@ -712,7 +718,6 @@ class UrunEkleSon: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
         }
     }
     
-    //mence bunun basin buraxmax lazmdi netden tapmax lazmdi niye bu cox uzun uzadida ona gore  bele olurda xiyar netd:eD  axtardim bidene belencinesi cixmadi hec o bilsen niyedi bu sekil saxranit oldu olmadi onlarida kontrol elemesen buda balaca oalcag way amina ala baxdimdalrdada olurduda neyse bratttttt sef baxmisan :D bu qoy ismizi goreyde maurhni xauranurann urann yeni mahni cixarb ona uqlax asram sikimekimi mene ne gijdillag isivqi ugor :D :D  uran deiemm ha dimdixxx uran sikime deyil uran sikdir :D
     func savelastimagetodb(itemid:String,photocounter:String,photouri:UIImage){
         print("Nicatalibli:Counter:\(photocounter)")
 
@@ -725,8 +730,12 @@ class UrunEkleSon: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
                 if error != nil {
                     print("error")
                     self.activt.stopAnimating()
+                    self.leftBarButtonItem?.isEnabled = false
+                    self.rightBarButtonItem?.isEnabled = false
                 } else { //succesfully
                     self.activt.stopAnimating()
+                    self.leftBarButtonItem?.isEnabled = false
+                    self.rightBarButtonItem?.isEnabled = false
                     storageRef.downloadURL(completion: { (url, error) in
                         
                         let photourl = url?.absoluteString
@@ -783,6 +792,8 @@ class UrunEkleSon: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
                                 print("Posting failed : ")
                                 //self.actIndicator.hidesWhenStopped = true
                                 self.activt.stopAnimating()
+                                self.leftBarButtonItem?.isEnabled = false
+                                self.rightBarButtonItem?.isEnabled = false
                                 return
                             }
                             //MARK: gonder
@@ -802,6 +813,8 @@ class UrunEkleSon: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
                             vc.modalPresentationStyle = .fullScreen
                             self.present(vc, animated: true, completion: nil)
                             self.activt.stopAnimating()
+                            self.leftBarButtonItem?.isEnabled = false
+                            self.rightBarButtonItem?.isEnabled = false
                               self.makeAlertt(tittle: "Başarılı", message: "Ürününüz sepete eklendi")
                         }
                         
@@ -1014,8 +1027,8 @@ class UrunEkleSon: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource 
             
             self.usersehir = value?["sehir"] as? String ?? ""
             self.userlatitude = value?["latitude"] as? Double ?? 0.0
-            self.userlongitude = value?["latitude"] as? Double ?? 0.0
-            
+            self.userlongitude = value?["longitude"] as? Double ?? 0.0
+          
         }) { (error) in
             print(error.localizedDescription)
         }

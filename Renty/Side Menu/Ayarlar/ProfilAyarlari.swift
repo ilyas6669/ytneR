@@ -172,12 +172,15 @@ class ProfilAyarlari: UIViewController,UIImagePickerControllerDelegate,UINavigat
         
         //database konum kayit guncellenme
         var firebaseusermap = [String : Any]()
-        
+      
         let userID = Auth.auth().currentUser!.uid
         
         firebaseusermap["latitude"] = Double(latitude)!
         firebaseusermap["longitude"] = Double(longutide)!
         
+        print("Nicatalibli:Konum:\(Double(latitude)!)")
+        print("Nicatalibli:Konum:\(Double(longutide)!)")
+//yoxla bidene indi duz aldi indi belke sen seyi kontrol elemirsen icaze yoxdusa gedir gic gice konum alir yada konum servisi aktif degil ise indi duz alir ? he sen bidene faidenin telefonunan konumu bagla icazeni bagla nece iphonda konum bagalma var ala obwi gozde gosterrem wpdan ele ele sonra isledey gorey onda ne alir konumu konumu gosterdiyin yer haradi ? item paylasma yerine get  ayri seyfede get ayri seyfede gediremde
         //database kayit etme
         let ref = Database.database().reference()
         ref.child("user").child(userID).updateChildValues(firebaseusermap)

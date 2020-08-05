@@ -68,6 +68,7 @@ class Menu: UITableViewController {
 
                        let namesurname = value?["namesurname"] as? String ?? ""
                        let profilepicture = value?["profilepicture"] as? String ?? ""
+                        
 
                         self.lblisim.text = namesurname
 

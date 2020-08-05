@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 import FirebaseInstanceID
 import SDWebImage
-
-class BanaOzel: UIViewController {
+import CoreLocation
+class BanaOzel: UIViewController ,CLLocationManagerDelegate{
     
 
    let tokens = Messaging.messaging().fcmToken
@@ -36,9 +36,14 @@ class BanaOzel: UIViewController {
     let estimateWidth = 160.0
     var cellMarginSize = 16.0
     
+    var publisher = ""
+    
+    var locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+
+        
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.register(UINib(nibName: "BanaOzelCell",bundle: nil), forCellWithReuseIdentifier: "BanaOzelCell")
@@ -54,11 +59,41 @@ class BanaOzel: UIViewController {
         getitemfromDB()
         savetokenstoDB()
         
+      
+
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        if CLLocationManager.locationServicesEnabled() {
+          switch (CLLocationManager.authorizationStatus()) {
+            case .notDetermined, .restricted, .denied:
+              print("Nicatalibli:No access")
+            case .authorizedAlways, .authorizedWhenInUse:
+              print("Nicatalibli:Access")
+          }
+        } else {
+          print("Nicatalibli:Location services are not enabled")
+        }
+    }
+    //bu qoydugun bildirim cixarirki rentyi konumuvu her zaman killannax istiyir istifade edilmeyende bele bu konum eriwimi var yoxdu onu kontrol eliyir konum icazesi var bidene menk overdimde bidene konum alam yerin yoxluyag sonra fiindeki kimi eliyersen bidene o bilgileri duzenle yerine get 
+    func locationManager(_ manager: CLLocationManager,
+                         didUpdateLocations locations: [CLLocation]) {
+        
+//        let locationArray = locations as NSArray
+//        let locationObj = locationArray.lastObject
+//        let coord = locationObj.customMirror//yetm isssen qalsn men ozm baxb duzelerem yo gozde girmiwem day fiinda aldigim kimi alacam burdada fiindda duz isdiyirdi he onu kopyala at bidene onda onnan qabag bidene bawqa sey eliyey
+//
+//        var lattitude = coord.latitude
+//        var longitude = coord.longitude
+//        print(lattitude)
+//        print(longitude)
+        //bu bana ozel sehfesinde ne location varki yox sendeki sef alir lokasyonu burda yoxluyramki duz alacag bu metod duz alacagsa bunlari koylasisann gozde
     }
     
     func sendnotification(userid:String,title:String,body:String){
-        
-        let tokenRef = Database.database().reference().child("user").child(userid)
+        let tokenRef = Database.database().reference().child("Tokens").child(userid)
         tokenRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 
@@ -74,13 +109,14 @@ class BanaOzel: UIViewController {
   
     }
     
+    //
+    
     func savetokenstoDB(){
     
         let userID = Auth.auth().currentUser!.uid
-        //database token kayit etme
         let ref = Database.database().reference()
         ref.child("Tokens").child(userID).child("token").setValue(self.tokens)
-        
+        //a bu ilkinin parolu neydi bilmiremki o vaxtida mem axtarmishdim tapdim nicattalibliynan proqrama gir bidene girmisem prqorami bagla tezden gir swinapp adi birdi ayridi ? bideki men rentyni acan kimi burdan nie bildirim gelir mene baxacig sen acdin ? shweinapp swinappin adi androidde swinapp bitiwikdi mende yaxci acdin ? he gonderirem bildirimi geldi bleettttttttt avude ye avude ye axirki rentyide tepdirir senol :D INDI sennen bildirim gondermekk qalib sen mene atag gorey sen idivi ver yoxluyax pBzxo9yI1ifJokmeNfM9NeGeu9D3
     }
     
     @objc func sifremiSifirlaa() {
@@ -129,6 +165,8 @@ extension BanaOzel : UICollectionViewDataSource,UICollectionViewDelegateFlowLayo
         let price = value2["pricestr"] as? String ?? ""
         let photo0 = value2["photo0"] as? String ?? ""
         let title = value2["title"] as? String ?? ""
+        
+      
             
         if title != "" {
             
@@ -158,7 +196,6 @@ extension BanaOzel : UICollectionViewDataSource,UICollectionViewDelegateFlowLayo
             
         }
         
-    
        
         cell.lblFiyat.text = "\(price) TL"
         cell.imgUrun.sd_setImage(with: URL(string: "\(photo0)"))
@@ -181,6 +218,20 @@ extension BanaOzel : UICollectionViewDataSource,UICollectionViewDelegateFlowLayo
             }
             
         }
+        
+        
+        cell.btnTapAction2 = {
+            () in
+            print("test")
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+//            //vc.receiver = self.publisher
+//            let navController = UINavigationController(rootViewController: vc)
+//            navController.modalPresentationStyle = .fullScreen
+//            self.present(navController, animated: true, completion: nil)
+            
+        }
+        
         
         return cell
     }
@@ -238,11 +289,25 @@ extension BanaOzel : UICollectionViewDataSource,UICollectionViewDelegateFlowLayo
                 let value = snap.value as? NSDictionary //get second snapshot
                 
                 let itempublish = value!["itempublish"] as? Bool ?? false
-                              
-                if itempublish {
-                    self.itemlist.append(value!)
+            //tezden islet bilsen acilanda gir sehiri deyistir gor deyisir nese ? bayax ol,madi indi olar isdiyir indi ana seyfe he zor indi basqa harda urun cekiriy kategoriye gore urunde cekiriy bie fso men bilen bu kontrolu kopyala at ora
+                
+                
+                let sehir = value!["sehir"] as? String ?? ""
+                let publisher = value!["publisher"] as? String ?? ""
+
+                if sehir == Cache.usersehir  && publisher != Auth.auth().currentUser?.uid {
+                    
+                    if itempublish {
+                        self.itemlist.append(value!)
+                    }
                 }
 
+            }
+            
+            if self.itemlist.count == 0 {
+                self.makeAlertt(tittle: "UYARI", message: "Renty de ürünler seçdiğiniz şehirlere göre listeleniyor.Seçdiğiniz şehirde hiç bir ürün bulunamadı.Diğer ürünleri görmek için AYARLAR kısmından şehirinizi değiştire bilirsiniz")
+            }else{
+                
             }
             
          

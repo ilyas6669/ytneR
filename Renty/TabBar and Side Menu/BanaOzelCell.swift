@@ -18,11 +18,11 @@ class BanaOzelCell: UICollectionViewCell {
     @IBOutlet weak var favoritBtn: UIButton!
     
     
-    @IBOutlet weak var btnMesaj: UIImageView!
+    
     
     var btnTapAction : (()->())?
     
-    
+     var btnTapAction2 : (()->())?
     
     
     override func awakeFromNib() {
@@ -35,15 +35,27 @@ class BanaOzelCell: UICollectionViewCell {
         imgUrun.layer.cornerRadius = 10
         
         imgUrun.contentMode = .scaleAspectFill
+     
+        
+        favoritBtn.addTarget(self, action: #selector(actionFavori), for: .touchUpInside)
         
         
     }
     
    
     @IBAction func testbtn(_ sender: Any) {
+        
+    }
+    
+    @objc func actionFavori() {
         btnTapAction?()
     }
     
    
+    @IBAction func btnMesaj(_ sender: Any) {
+        
+         btnTapAction2?()
+    }
+    
     
 }

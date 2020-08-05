@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+//yetim he yoxu icine pox tek tek ansdorid ios da axtaardim hesene yoxdu yetim sen bidene o dediyi urunu silde yukluyeh getsin hecn problem yaranmir axi bele qalanda mene 2 defe deyibde sefaki neyese girende atir ona gore baxirdim bu o biri lipixida tpammiram test olan itemi 		
 class CikisYapPop: UIView {
     
     weak var controller:UIViewController!
